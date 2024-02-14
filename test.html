@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Location</title>
+</head>
+<body>
+
+<script>
+    // Check if the Geolocation API is supported by the browser
+    if ("geolocation" in navigator) {
+        // Use the Geolocation API to get the user's current position
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                // Success callback
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+
+                // Use the latitude and longitude as needed
+                console.log("Latitude: " + latitude + ", Longitude: " + longitude);
+            },
+            function(error) {
+                // Error callback
+                console.error("Error getting location:", error.message);
+            }
+        );
+
+        // Watch for changes in the user's position (real-time updates)
+        var watchId = navigator.geolocation.watchPosition(
+            function(position) {
+                // Success callback for real-time updates
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+
+                // Use the latitude and longitude as needed
+                console.log("Real-time Latitude: " + latitude + ", Longitude: " + longitude);
+            },
+            function(error) {
+                // Error callback for real-time updates
+                console.error("Error getting real-time location:", error.message);
+            }
+        );
+
+        // To stop watching for real-time updates, you can use:
+        // navigator.geolocation.clearWatch(watchId);
+    } else {
+        console.error("Geolocation is not supported by this browser.");
+    }
+</script>
+
+</body>
+</html>
