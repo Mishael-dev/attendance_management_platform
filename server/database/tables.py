@@ -6,7 +6,7 @@ metadata = MetaData()
 class_template = Table(
     'class_template',
     metadata,
-    Column('id', Integer, autoincrement=True),
+    Column('id', Integer, primary_key=True, autoincrement=True),
     Column('lecturer_id', Integer),
     Column('course_name', String),
     Column('course_code', String),
@@ -14,7 +14,7 @@ class_template = Table(
 )
 
 class_instance = Table(
-    'class_schedule',
+    'class_instance',
     metadata,
     Column('id', Integer, primary_key=True, autoincrement=True),
     Column('lecturer', String),
@@ -29,5 +29,3 @@ class_instance = Table(
 
 
 metadata.create_all(connection.engine)
-
-print("hello wordl")

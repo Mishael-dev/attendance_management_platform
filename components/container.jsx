@@ -5,7 +5,7 @@ const Container = ({ sm = false, pad = false, children }) => {
     <div
       className={classNames("mx-auto px-6 ", {
         "pt-12": pad,
-        "max-w-3xl": sm,
+        "max-w-2xl": sm,
         "max-w-7xl": !sm,
       })}
     >
