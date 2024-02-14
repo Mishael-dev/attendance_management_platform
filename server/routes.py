@@ -20,6 +20,11 @@ def send_class_data():
     result = models.create_class(data)
     return result
 
+@app.route("/get_class_templates", methods=["GET"])
+def get_class_templates():
+    result = models.get_class_templates()
+    return result
+
 
 if __name__ == "__main__":
     app.run()

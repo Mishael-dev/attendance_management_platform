@@ -18,6 +18,7 @@ class_instance = Table(
     metadata,
     Column('id', Integer, primary_key=True, autoincrement=True),
     Column('lecturer', String),
+    Column("status", String),
     Column('course', String),
     Column('start_time', DateTime),
     Column('end_time', DateTime),
