@@ -13,18 +13,22 @@ def send_class_template():
     return result
 
 
+@app.route("/get_class_templates", methods=["GET"])
+def get_class_templates():
+    result = models.get_class_templates()
+    return result
+
+@app.route("/get_class_instances", methods=["GET"])
+def get_class_instances():
+    result = models.get_class_instances()
+    return result
+
 @app.route("/send_class_data", methods=["POST"])
 def send_class_data():
     data = request.json
     print(data)
     result = models.create_class(data)
     return result
-
-@app.route("/get_class_templates", methods=["GET"])
-def get_class_templates():
-    result = models.get_class_templates()
-    return result
-
 
 if __name__ == "__main__":
     app.run()

@@ -10,6 +10,8 @@ class_template = Table(
     Column('lecturer_id', Integer),
     Column('course_name', String),
     Column('course_code', String),
+    Column('duration', Integer),
+    Column('level', Integer),
     Column('group', String)
 )
 
@@ -19,14 +21,14 @@ class_instance = Table(
     Column('id', Integer, primary_key=True, autoincrement=True),
     Column('lecturer', String),
     Column("status", String),
-    Column('course', String),
+    Column('course_name', String),
+    Column('course_code', String),
     Column('start_time', DateTime),
     Column('end_time', DateTime),
     Column('location', JSON, nullable=False),
-    Column('attendance_list', ARRAY(String)),
-    Column('level_number', Integer),
-    Column('group_character', String)
+    Column('attendance_list', JSON),
+    Column('level', Integer),
+    Column('group', String)
 )
-
 
 metadata.create_all(connection.engine)

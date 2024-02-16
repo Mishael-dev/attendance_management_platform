@@ -1,5 +1,11 @@
 import Image from "next/image";
+import Container from "@/components/container";
 
 export default function Home() {
-  return <main>hello world</main>;
+  return (
+    <main>
+      <Container>
+      </Container>
+    </main>
+  );
 }

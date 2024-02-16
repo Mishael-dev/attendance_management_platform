@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-
-db_url = "postgresql://postgres:6C6cgbdFDB-a-B*b3CD6-64bbfgge1a1@viaduct.proxy.rlwy.net:55694/railway"
+          
+db_url = "postgresql://postgres:eggbD5FdE66EA3aB4F*BcF1C*Da12d3C@roundhouse.proxy.rlwy.net:56715/railway"
 
 engine = create_engine(db_url)
