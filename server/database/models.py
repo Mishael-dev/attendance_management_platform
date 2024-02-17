@@ -71,3 +71,27 @@ def get_class_instances():
             "status": "successful",
             "data": class_instances
         }
+    
+def add_student(data):
+    with connect.engine.connect() as conn:
+        query = insert(tables.student).values(
+            first_name=data["first_name"], full_name=data["full_name"], matric_number=data["matric_number"], password=data["password"], email=data["email"]).returning(tables.student)
+        result = conn.execute(query).fetchone()
+        conn.commit()
+        return {
+            "status": "successful",
+            "message": "done",
+            "user": dict(result._asdict())
+        }
+    
+def add_lecturer(data):
+    with connect.engine.connect() as conn:
+        query = insert(tables.lecturer).values(
+            first_name=data["first_name"], full_name=data["full_name"], password=data["password"], email=data["email"]).returning(tables.lecturer)
+        result = conn.execute(query).fetchone()
+        conn.commit()
+        return {
+            "status": "successful",
+            "message": "done",
+            "user": dict(result._asdict())
+        }

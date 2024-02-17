@@ -26,4 +26,49 @@ class_instance = {
     "group_character": "A"
 }
 
-models.create_class(class_instance)
+# from flask import Flask, request, jsonify
+# import jwt
+# from datetime import datetime, timedelta
+
+# app = Flask(__name__)
+
+# # Secret key for encoding and decoding JWTs
+# app.config['SECRET_KEY'] = 'your_secret_key'
+
+# # Mock user data (replace with actual database interactions)
+# users = [
+#     {'id': 1, 'username': 'user1', 'password': 'hashed_password1'},
+#     {'id': 2, 'username': 'user2', 'password': 'hashed_password2'},
+# ]
+
+# @app.route('/api/login', methods=['POST'])
+# def login_user():
+#     # Receive user sign-in credentials from the request
+#     data = request.json
+#     username = data.get('username')
+#     password = data.get('password')
+
+#     # Verify credentials and authenticate user (pseudo code)
+#     user = authenticate_user(username, password)
+
+#     if user:
+#         # Generate a JWT token
+#         token_payload = {
+#             'user_id': user['id'],
+#             'username': user['username'],
+#             'exp': datetime.utcnow() + timedelta(days=1)  # Token expiration time
+#         }
+
+#         token = jwt.encode(token_payload, app.config['SECRET_KEY'], algorithm='HS256')
+
+#         # Respond with the JWT token in the response body
+#         return jsonify({'token': token, 'message': 'User authenticated successfully'})
+#     else:
+#         return jsonify({'error': 'Invalid credentials'}), 401
+
+# def authenticate_user(username, password):
+#     # Mock authentication (replace with actual database interactions)
+#     for user in users:
+#         if user['username'] == username and user['password'] == password:
+#             return user
+#     return None

@@ -3,6 +3,28 @@ import database.connection as connection
 
 metadata = MetaData()
 
+student = Table(
+    'student',
+    metadata,
+    Column('id', Integer, primary_key=True, autoincrement=True),
+    Column("first_name", String),
+    Column("full_name", String),
+    Column("matric_number", Integer),
+    Column("email", String),
+    Column("password", String),
+    Column("level", Integer)
+)
+
+lecturer = Table(
+    'lecturer',
+    metadata,
+    Column('id', Integer, primary_key=True, autoincrement=True),
+    Column("first_name", String),
+    Column("full_name", String),
+    Column("email", String),
+    Column("password", String)
+)
+
 class_template = Table(
     'class_template',
     metadata,
@@ -30,5 +52,6 @@ class_instance = Table(
     Column('level', Integer),
     Column('group', String)
 )
+
 
 metadata.create_all(connection.engine)

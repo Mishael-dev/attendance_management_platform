@@ -5,9 +5,7 @@ import NavBar from "@/components/NavBar";
 export default function Home() {
   return (
     <main>
-      <Container>
-        <NavBar />
-      </Container>
+      <Container>signup</Container>
     </main>
   );
 }
