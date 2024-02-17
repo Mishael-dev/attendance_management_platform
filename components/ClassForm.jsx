@@ -24,11 +24,11 @@ const ClassForm = () => {
     };
 
     console.log(data);
-    sendClassTemplate(info);
+    sendClassTemplate(info).then(() => router.push("/start_class"));
   }
 
   const handleButtonClick = () => {
-    router.push("/start_class");
+    // router.push("/start_class");
   };
 
   return (

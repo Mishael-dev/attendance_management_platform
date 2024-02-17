@@ -1,5 +1,5 @@
 
-from sqlalchemy import insert, select
+from sqlalchemy import insert, select , and_
 import database.tables as tables
 import database.connection as connect
 
@@ -95,3 +95,59 @@ def add_lecturer(data):
             "message": "done",
             "user": dict(result._asdict())
         }
+
+def get_single_student(matric_number, password):
+    with connect.engine.connect() as conn:
+        query = select(tables.student).where(
+            and_(
+                tables.student.c.password == password,
+                tables.student.c.matric_number == matric_number
+            )
+        )
+        result = conn.execute(query)
+        
+        row = result.fetchone()
+        
+        if row:
+            student_data = dict(zip(result.keys(), row))
+            
+            return {
+                "message": "done",
+                "status": "successful",
+                "data": student_data
+            }
+        else:
+            return {
+                "message": "Data wasn't found on the server",
+                "status": "unsuccessful"
+            }
+
+def get_single_lecturer(email, password):
+    with connect.engine.connect() as conn:
+        query = select(tables.lecturer).where(
+            and_(
+                tables.lecturer.c.password == password,
+                tables.lecturer.c.email == email
+            )
+        )
+        result = conn.execute(query)
+        
+        row = result.fetchone()
+        
+        if row:
+            student_data = dict(zip(result.keys(), row))
+            
+            return {
+                "message": "done",
+                "status": "successful",
+                "data": student_data
+            }
+        else:
+            return {
+                "message": "Data wasn't found on the server",
+                "status": "unsuccessful"
+            }
+
+
+
+

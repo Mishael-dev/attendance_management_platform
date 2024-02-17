@@ -149,3 +149,55 @@ export const registerLecturer = async (postData) => {
     throw error; // Re-throw the error to propagate it to the next catch block
   }
 };
+
+export const signStudent = async (postData) => {
+  const apiUrl = SERVER_URL + "/sign_student";
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(postData),
+  };
+
+  try {
+    const response = await fetch(apiUrl, requestOptions);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+
+export const signLecturer = async (postData) => {
+  const apiUrl = SERVER_URL + "/sign_lecturer";
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(postData),
+  };
+
+  try {
+    const response = await fetch(apiUrl, requestOptions);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};

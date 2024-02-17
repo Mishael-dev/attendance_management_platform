@@ -78,16 +78,15 @@ def register_lecturer():
 @app.route("/sign_student", methods=["POST"])
 def sign_student():
     data = request.json
-    name = data["name"]
-    matric_number = app["matric_number"]
-    return "hello world"
+    password = data["password"]
+    matric_number = data["matric_number"]
 
-@app.route("/sign_lecturer", methods=["POST","OPTIONS"])
-def sign_lecturer():
-    data = request.json
-    result = models.add_lecturer(data)
-    user = result["user"]
-
+    result = models.get_single_student(matric_number, password)
+    if result["status"] == "unsuccessful":
+        return result
+    
+    user = result["data"]
+        
     token_payload = {
         "user":"lecturer",
         "user_id":user["id"],
@@ -95,6 +94,34 @@ def sign_lecturer():
     }
 
     token = jwt.encode(token_payload, app.config["SECRET_KEY"], algorithm="HS256" )
+
+    return {
+        "status":"successful",
+        "message" : "login was successful",
+        "token":token,
+        "data":user,
+    }
+
+@app.route("/sign_lecturer", methods=["POST"])
+def sign_lecturer():
+    data = request.json
+    password = data["password"]
+    email = data["email"]
+
+    result = models.get_single_lecturer(email, password)
+    if result["status"] == "unsuccessful":
+        return result
+    
+    user = result["data"]
+        
+    token_payload = {
+        "user":"lecturer",
+        "user_id":user["id"],
+        "exp": datetime.utcnow() + timedelta(days=7)
+    }
+
+    token = jwt.encode(token_payload, app.config["SECRET_KEY"], algorithm="HS256" )
+
     return {
         "status":"successful",
         "message" : "login was successful",

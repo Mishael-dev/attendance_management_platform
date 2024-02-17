@@ -16,11 +16,12 @@ const LecturerSignUpForm = () => {
   const add_user = userStore((state) => state.add_user);
 
   const onSubmit = (post_data) => {
-    registerLecturer(post_data).then((data) => add_user(data.data, data.token));
-  };
-  const handleButtonClick = () => {
-    const { user_id } = getUser();
-    router.push(`http://localhost:3000/dashboard/lecturer/${user_id}`);
+    registerLecturer(post_data)
+      .then((data) => add_user(data.data, data.token))
+      .then(() => {
+        const { user_id } = getUser();
+        router.push(`http://localhost:3000/dashboard/lecturer/${user_id}`);
+      });
   };
 
   return (
@@ -76,7 +77,7 @@ const LecturerSignUpForm = () => {
           </div>
 
           {/* Submit Button */}
-          <Button onClick={handleButtonClick} type="submit">
+          <Button type="submit">
             Register Lecturer
           </Button>
         </form>

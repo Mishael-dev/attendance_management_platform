@@ -16,13 +16,18 @@ const StudentSignInForm = () => {
   const router = useRouter();
 
   const onSubmit = (post_data) => {
-    RegisterStudent(post_data).then((data) => add_user(data.data, data.token));
+    RegisterStudent(post_data)
+      .then((data) => {
+        console.log(data);
+        add_user(data.data, data.token);
+      })
+      .then(() => {
+        const { user, user_id } = getUser();
+        router.push(`http://localhost:3000/dashboard/student/${user_id}`);
+      });
   };
 
-  const handleButtonClick = () => {
-    const { user, user_id } = getUser();
-    router.push(`http://localhost:3000/dashboard/student/${user_id}`);
-  };
+  
   return (
     <div>
       <Container sm>
@@ -88,7 +93,7 @@ const StudentSignInForm = () => {
           </div>
 
           {/* Submit Button */}
-          <Button onClick={handleButtonClick} type="submit">
+          <Button type="submit">
             Sign Up
           </Button>
         </form>
