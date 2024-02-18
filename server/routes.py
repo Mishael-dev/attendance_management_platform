@@ -141,6 +141,15 @@ def get_student_classes():
     return result
     return "done"
 
+@app.route("/get_lecturer_classes", methods=["GET"])
+def get_lecturer_classes():
+    lecturer_id = request.args.get("lecturer_id")
+
+    print(lecturer_id)
+
+    result = models.get_lecturer_classes(lecturer_id)
+    return result
+
 
 if __name__ == "__main__":
     app.run()

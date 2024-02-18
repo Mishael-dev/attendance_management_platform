@@ -1,3 +1,4 @@
+
 import { H1 } from "@/components/typography";
 import Container from "@/components/container";
 import ClassForm from "@/components/ClassForm";

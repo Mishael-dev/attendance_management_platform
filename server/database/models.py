@@ -188,3 +188,24 @@ def get_student_classes(course, group, level):
             "status": "successful",
             "data": student_classes
         }
+
+
+def get_lecturer_classes(id):
+    with connect.engine.connect() as conn:
+        query = select(tables.class_instance).where(
+                tables.class_instance.c.lecturer == id
+        )
+        result = conn.execute(query)
+
+        rows = result.fetchall()
+
+        lecturer_classes = [
+            dict(zip(result.keys(), row))
+            for row in rows
+        ]
+
+        return {
+            "message": "done",
+            "status": "successful",
+            "data": lecturer_classes
+        }

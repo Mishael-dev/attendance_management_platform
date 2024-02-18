@@ -8,9 +8,11 @@ import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
 import { sendClassTemplate } from "@/utils/api";
 import { useRouter } from "next/navigation";
+import { get_user_data } from "@/utils/functions";
 
 const ClassForm = () => {
   const { handleSubmit, register } = useForm();
+  const user = get_user_data();
   const router = useRouter();
 
   function onSubmit(data) {
@@ -30,7 +32,7 @@ const ClassForm = () => {
   }
 
   const handleButtonClick = () => {
-    router.push("/start_class");
+    router.push(`/dashboard/lecturer/${user.id}`);
   };
 
   return (

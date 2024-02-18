@@ -21,7 +21,7 @@ export default function Home({ params }) {
     }
 
     fetchData();
-  }, []);
+  }, [user.course, user.group, user.level]);
 
   return (
     <main>
@@ -43,9 +43,13 @@ export default function Home({ params }) {
             <TabsContent value="live">
               <Card className="p-10">
                 {classes.length > 0
-                  ? classes.map((clas) => {
+                  ? classes.map((clas, index) => {
                       if (clas.status == "ongoing")
-                        return <div>{clas.course_code} started {clas.start_time}</div>;
+                        return (
+                          <div key={index}>
+                            {clas.course_code} started {clas.start_time}
+                          </div>
+                        );
                     })
                   : ""}
               </Card>

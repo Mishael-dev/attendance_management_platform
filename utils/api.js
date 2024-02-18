@@ -230,3 +230,30 @@ export async function getStudentClasses(course_name, group, level) {
     return { message: "error", status: "failed" };
   }
 }
+
+export async function getLecturerClasses(lecturer_id) {
+  const apiUrl =
+    SERVER_URL + `/get_lecturer_classes?lecturer_id=${lecturer_id}`;
+
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const response = await fetch(apiUrl, requestOptions);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data.data;
+  } catch (error) {
+    console.error("Error:", error);
+    return { message: "error", status: "failed" };
+  }
+}
