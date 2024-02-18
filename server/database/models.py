@@ -209,3 +209,54 @@ def get_lecturer_classes(id):
             "status": "successful",
             "data": lecturer_classes
         }
+
+from sqlalchemy import select
+
+from datetime import datetime
+
+def add_student_attendance(student_id, arrival_time, class_id):
+    with connect.engine.connect() as conn:
+        # Retrieve student information
+        student_query = select(tables.student).where(tables.student.c.id == student_id)
+        student_result = conn.execute(student_query)
+        student_data = student_result.fetchone()
+
+        if not student_data:
+            return {
+                "message": "Student not found",
+                "status": "failed"
+            }
+
+        class_instance_query = select(tables.class_instance).where(
+            (tables.class_instance.c.id == class_id)
+        )
+        class_instance_result = conn.execute(class_instance_query)
+        class_instance_data = class_instance_result.fetchone()
+
+        if not class_instance_data:
+            return {
+                "message": "No class instance found for the given student and time",
+                "status": "failed"
+            }
+
+        # Update attendance list in class instance
+        attendance_list = class_instance_data.attendance_list or []
+        student_attendance = {
+            "student_id": student_id,
+            "arrival_time": arrival_time  # Assuming arrival_time is already in the correct format
+        }
+        attendance_list.append(student_attendance)
+
+        # Update the database
+        update_query = (
+            tables.class_instance.update()
+            .where(tables.class_instance.c.id == class_instance_data.id)
+            .values(attendance_list=attendance_list)
+        )
+        conn.execute(update_query)
+        conn.commit()
+
+        return {
+            "message": "Attendance added successfully",
+            "status": "successful"
+        }

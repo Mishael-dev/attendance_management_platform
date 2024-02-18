@@ -8,7 +8,9 @@ const Page = async ({ params }) => {
   const findThisClass = () => {
     return classes.find((clas) => clas.id == classId);
   };
+  
   const { course_name, course_code, start_time, end_time, attendance_list } = findThisClass();
+  console.log(attendance_list)
 
   return (
     classes.length > 0 && (

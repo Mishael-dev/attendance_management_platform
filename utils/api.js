@@ -84,7 +84,7 @@ export async function getClasses() {
   };
 
   try {
-    const response = await fetch(apiUrl, requestOptions);
+    const response = await fetch(apiUrl, { cache: "no-cache" }, requestOptions);
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);

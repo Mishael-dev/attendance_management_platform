@@ -150,8 +150,18 @@ def get_lecturer_classes():
     result = models.get_lecturer_classes(lecturer_id)
     return result
 
+@app.route("/add_student_attendance", methods=["POST"])
+def add_student_attendance():
+    data = request.json
+
+    student_id = data["student_id"]
+    arrival_time = data["arrival_time"]
+    class_id = data["class_id"]
+
+    result = models.add_student_attendance(student_id, arrival_time, class_id)
+    return result
+
 
 if __name__ == "__main__":
     app.run()
 
-    

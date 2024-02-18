@@ -8,6 +8,8 @@ import { H2 } from "@/components/typography";
 import { get_user_data } from "@/utils/functions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getStudentClasses } from "@/utils/api";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home({ params }) {
   const user = get_user_data();
@@ -41,17 +43,28 @@ export default function Home({ params }) {
               <TabsTrigger value="history">Class history</TabsTrigger>
             </TabsList>
             <TabsContent value="live">
-              <Card className="p-10">
-                {classes.length > 0
-                  ? classes.map((clas, index) => {
-                      if (clas.status == "ongoing")
-                        return (
-                          <div key={index}>
-                            {clas.course_code} started {clas.start_time}
-                          </div>
-                        );
-                    })
-                  : ""}
+              <Card className="p-10 ">
+                <div className="flex flex-col gap-y-2">
+                  {classes.length > 0
+                    ? classes.map((clas, index) => {
+                        if (clas.status == "ongoing")
+                          return (
+                            <div
+                              key={index}
+                              className="flex gap-x-2 justify-between items-center max-w-xl "
+                            >
+                              <span className="font-bold">
+                                {clas.course_code}
+                              </span>{" "}
+                              started {clas.start_time}
+                              <Link href={`/class/${clas.id}`}>
+                                <Button>Join</Button>
+                              </Link>
+                            </div>
+                          );
+                      })
+                    : ""}
+                </div>
               </Card>
             </TabsContent>
 
