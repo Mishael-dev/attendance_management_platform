@@ -72,3 +72,6 @@ class_instance = {
 #         if user['username'] == username and user['password'] == password:
 #             return user
 #     return None
+
+
+# http://localhost:5000/get_student_classes?course_name=computer&group=C&level=200

@@ -9,7 +9,9 @@ student = Table(
     Column('id', Integer, primary_key=True, autoincrement=True),
     Column("first_name", String),
     Column("full_name", String),
+    Column("course", String),
     Column("matric_number", Integer),
+    Column("group", String),
     Column("email", String),
     Column("password", String),
     Column("level", Integer)
@@ -32,6 +34,7 @@ class_template = Table(
     Column('lecturer_id', Integer),
     Column('course_name', String),
     Column('course_code', String),
+    Column('course', String),
     Column('duration', Integer),
     Column('level', Integer),
     Column('group', String)
@@ -45,6 +48,7 @@ class_instance = Table(
     Column("status", String),
     Column('course_name', String),
     Column('course_code', String),
+    Column('course', String),
     Column('start_time', DateTime),
     Column('end_time', DateTime),
     Column('location', JSON, nullable=False),

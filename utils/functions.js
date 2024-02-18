@@ -1,4 +1,5 @@
-import jwt from "jsonwebtoken"
+"use client"
+import jwt from "jsonwebtoken";
 
 export function getCurrentTime() {
   const currentDate = new Date();
@@ -48,8 +49,11 @@ export function getEndTime(startTime, durationInHours) {
 
 export const getUser = () => {
   const token = localStorage.getItem("userToken");
-  console.log(token);
-  console.log(jwt)
+  console.log(jwt);
   const decodedToken = jwt.decode(token, "qR7pXw2fL9sJ3mY8tZa6o");
   return { user: decodedToken.user, user_id: decodedToken.user_id };
+};
+
+export const get_user_data = () => {
+  return JSON.parse(localStorage.getItem("user"));
 };

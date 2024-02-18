@@ -33,6 +33,7 @@ const ClassTemplates = () => {
       start_time: getCurrentTime(),
       end_time: getEndTime(getCurrentTime(), 2),
       location: { long: 500, lat: 600 },
+      course: post_data.course,
       attendance_list: [{ student_id: 1, mins_late: 20 }],
       status: "ongoing",
     };
@@ -44,7 +45,7 @@ const ClassTemplates = () => {
     <section>
       {templates.length > 0
         ? templates.map(
-            ({ course_code, course_name, group, level, id }, index) => (
+            ({ course_code, course_name, course, group, level, id }, index) => (
               <Card key={index}>
                 <div>
                   <H2>{course_name}</H2>
@@ -61,6 +62,7 @@ const ClassTemplates = () => {
                         course_name,
                         group,
                         level,
+                        course,
                       })
                     }
                   >

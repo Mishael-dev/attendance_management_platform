@@ -201,3 +201,32 @@ export const signLecturer = async (postData) => {
     throw error;
   }
 };
+
+export async function getStudentClasses(course_name, group, level) {
+  // Replace with your actual server URL
+  const apiUrl =
+    SERVER_URL +
+    `/get_student_classes?course_name=${course_name}&group=${group}&level=${level}`;
+
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const response = await fetch(apiUrl, requestOptions);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data.data;
+  } catch (error) {
+    console.error("Error:", error);
+    return { message: "error", status: "failed" };
+  }
+}

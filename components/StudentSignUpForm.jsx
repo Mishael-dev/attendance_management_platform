@@ -27,7 +27,6 @@ const StudentSignInForm = () => {
       });
   };
 
-  
   return (
     <div>
       <Container sm>
@@ -53,6 +52,40 @@ const StudentSignInForm = () => {
               id="full_name"
               type="text"
               {...register("full_name", { required: true })}
+            />
+          </div>
+
+          {/* course */}
+          <div className="flex flex-col items-start w-[60%] mt-4">
+            <Label htmlFor="course" className="text-right">
+              Course
+            </Label>
+            <Input
+              id="course"
+              type="text"
+              {...register("course", { required: true })}
+            />
+          </div>
+
+          <div className="flex flex-col items-start w-[60%] mt-4">
+            <Label htmlFor="level" className="text-right">
+              level
+            </Label>
+            <Input
+              id="level"
+              type="text"
+              {...register("level", { required: true })}
+            />
+          </div>
+
+          <div className="flex flex-col items-start w-[60%] mt-4">
+            <Label htmlFor="course" className="text-right">
+              Group
+            </Label>
+            <Input
+              id="group"
+              type="text"
+              {...register("group", { required: true })}
             />
           </div>
 
@@ -93,9 +126,7 @@ const StudentSignInForm = () => {
           </div>
 
           {/* Submit Button */}
-          <Button type="submit">
-            Sign Up
-          </Button>
+          <Button type="submit">Sign Up</Button>
         </form>
       </Container>
     </div>

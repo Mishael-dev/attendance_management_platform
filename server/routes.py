@@ -129,5 +129,18 @@ def sign_lecturer():
         "data":user,
     }
 
+@app.route("/get_student_classes", methods=["GET"])
+def get_student_classes():
+    course = request.args.get("course_name")
+    group = request.args.get("group")
+    level = request.args.get("level")
+
+    print(course, group, level)
+
+    result = models.get_student_classes(course, group, level)
+    return result
+    return "done"
+
+
 if __name__ == "__main__":
     app.run()

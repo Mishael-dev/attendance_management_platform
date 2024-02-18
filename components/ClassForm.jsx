@@ -14,21 +14,23 @@ const ClassForm = () => {
   const router = useRouter();
 
   function onSubmit(data) {
+    console.log(data);
     const info = {
       course_name: data.course_name,
       course_code: data.course_code,
       group: data.group,
       level: data.level,
+      course: data.course,
       duration: data.duration,
       lecturer_id: 1,
     };
 
-    console.log(data);
-    sendClassTemplate(info).then(() => router.push("/start_class"));
+    console.log(info);
+    sendClassTemplate(info);
   }
 
   const handleButtonClick = () => {
-    // router.push("/start_class");
+    router.push("/start_class");
   };
 
   return (
@@ -45,6 +47,17 @@ const ClassForm = () => {
                 id="course_name"
                 type="text"
                 {...register("course_name", { required: true })}
+              />
+            </div>
+
+            <div className="flex flex-col items-start w-[30%]">
+              <Label htmlFor="item" className="text-right">
+                Course
+              </Label>
+              <Input
+                id="course"
+                type="text"
+                {...register("course", { required: true })}
               />
             </div>
 
@@ -96,7 +109,7 @@ const ClassForm = () => {
             </div>
           </div>
           <Button onClick={handleButtonClick} type="submit">
-            hello
+            Create Class
           </Button>
         </form>
       </Container>
