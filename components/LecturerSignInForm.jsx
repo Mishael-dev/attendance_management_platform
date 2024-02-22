@@ -50,7 +50,7 @@ const LecturerSignInForm = () => {
             />
           </div>
           {/* Submit Button */}
-          <Button type="submit">Sign Up</Button>
+          <Button type="submit" className="mt-4">Sign Up</Button>
         </form>
       </Container>
     </div>

@@ -16,7 +16,6 @@ const ClassForm = () => {
   const router = useRouter();
 
   function onSubmit(data) {
-    console.log(data);
     const info = {
       course_name: data.course_name,
       course_code: data.course_code,
@@ -24,7 +23,7 @@ const ClassForm = () => {
       level: data.level,
       course: data.course,
       duration: data.duration,
-      lecturer_id: 1,
+      lecturer_id: user.id,
     };
 
     console.log(info);

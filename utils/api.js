@@ -257,3 +257,71 @@ export async function getLecturerClasses(lecturer_id) {
     return { message: "error", status: "failed" };
   }
 }
+
+export const signStudentAttendance= async (postData) => {
+  const apiUrl = SERVER_URL + "/add_student_attendance";
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(postData),
+  };
+
+  try {
+    const response = await fetch(apiUrl, requestOptions);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+
+export const downloadAttendanceList = async (postData) => {
+  const apiUrl = SERVER_URL + "/download_list";
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(postData),
+  };
+
+  try {
+    const response = await fetch(apiUrl, requestOptions);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    // Check if the response content type is application/json
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      const data = await response.json();
+      return data;
+    } else {
+      // The response is likely a file download
+      // Trigger the file download by creating a blob and using URL.createObjectURL
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      // Create a temporary link and trigger a download
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "attendance_list.xlsx"); // Set the desired file name
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};

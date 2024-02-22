@@ -31,102 +31,106 @@ const StudentSignInForm = () => {
     <div>
       <Container sm>
         <form onSubmit={handleSubmit(onSubmit)} className="mt-20">
-          {/* First Name */}
-          <div className="flex flex-col items-start w-[60%]">
-            <Label htmlFor="first_name" className="text-right">
-              First Name
-            </Label>
-            <Input
-              id="first_name"
-              type="text"
-              {...register("first_name", { required: true })}
-            />
-          </div>
+          <div className="md:w-[60%] w-full">
+            {/* First Name */}
+            <div className="flex flex-col items-start">
+              <Label htmlFor="first_name" className="text-right">
+                First Name
+              </Label>
+              <Input
+                id="first_name"
+                type="text"
+                {...register("first_name", { required: true })}
+              />
+            </div>
 
-          {/* Full Name */}
-          <div className="flex flex-col items-start w-[60%] mt-4">
-            <Label htmlFor="full_name" className="text-right">
-              Full Name
-            </Label>
-            <Input
-              id="full_name"
-              type="text"
-              {...register("full_name", { required: true })}
-            />
-          </div>
+            {/* Full Name */}
+            <div className="flex flex-col items-start mt-4">
+              <Label htmlFor="full_name" className="text-right">
+                Full Name
+              </Label>
+              <Input
+                id="full_name"
+                type="text"
+                {...register("full_name", { required: true })}
+              />
+            </div>
 
-          {/* course */}
-          <div className="flex flex-col items-start w-[60%] mt-4">
-            <Label htmlFor="course" className="text-right">
-              Course
-            </Label>
-            <Input
-              id="course"
-              type="text"
-              {...register("course", { required: true })}
-            />
-          </div>
+            {/* course */}
+            <div className="flex flex-col items-start mt-4">
+              <Label htmlFor="course" className="text-right">
+                Course
+              </Label>
+              <Input
+                id="course"
+                type="text"
+                {...register("course", { required: true })}
+              />
+            </div>
 
-          <div className="flex flex-col items-start w-[60%] mt-4">
-            <Label htmlFor="level" className="text-right">
-              level
-            </Label>
-            <Input
-              id="level"
-              type="text"
-              {...register("level", { required: true })}
-            />
-          </div>
+            <div className="flex flex-col items-start mt-4">
+              <Label htmlFor="level" className="text-right">
+                level
+              </Label>
+              <Input
+                id="level"
+                type="text"
+                {...register("level", { required: true })}
+              />
+            </div>
 
-          <div className="flex flex-col items-start w-[60%] mt-4">
-            <Label htmlFor="course" className="text-right">
-              Group
-            </Label>
-            <Input
-              id="group"
-              type="text"
-              {...register("group", { required: true })}
-            />
-          </div>
+            <div className="flex flex-col items-start mt-4">
+              <Label htmlFor="course" className="text-right">
+                Group
+              </Label>
+              <Input
+                id="group"
+                type="text"
+                {...register("group", { required: true })}
+              />
+            </div>
 
-          {/* Matric Number */}
-          <div className="flex flex-col items-start w-[60%] mt-4">
-            <Label htmlFor="matric_number" className="text-right">
-              Matric Number
-            </Label>
-            <Input
-              id="matric_number"
-              type="text"
-              {...register("matric_number", { required: true })}
-            />
-          </div>
+            {/* Matric Number */}
+            <div className="flex flex-col items-start mt-4">
+              <Label htmlFor="matric_number" className="text-right">
+                Matric Number
+              </Label>
+              <Input
+                id="matric_number"
+                type="text"
+                {...register("matric_number", { required: true })}
+              />
+            </div>
 
-          {/* Email */}
-          <div className="flex flex-col items-start w-[60%] mt-4">
-            <Label htmlFor="email" className="text-right">
-              Email
-            </Label>
-            <Input
-              id="email"
-              type="email"
-              {...register("email", { required: true })}
-            />
-          </div>
+            {/* Email */}
+            <div className="flex flex-col items-start mt-4">
+              <Label htmlFor="email" className="text-right">
+                Email
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                {...register("email", { required: true })}
+              />
+            </div>
 
-          {/* Password */}
-          <div className="flex flex-col items-start w-[60%] mt-4">
-            <Label htmlFor="password" className="text-right">
-              Password
-            </Label>
-            <Input
-              id="password"
-              type="password"
-              {...register("password", { required: true })}
-            />
-          </div>
+            {/* Password */}
+            <div className="flex flex-col items-start mt-4">
+              <Label htmlFor="password" className="text-right">
+                Password
+              </Label>
+              <Input
+                id="password"
+                type="password"
+                {...register("password", { required: true })}
+              />
+            </div>
 
-          {/* Submit Button */}
-          <Button type="submit">Sign Up</Button>
+            {/* Submit Button */}
+            <Button type="submit" className="mt-4">
+              Sign Up
+            </Button>
+          </div>
         </form>
       </Container>
     </div>

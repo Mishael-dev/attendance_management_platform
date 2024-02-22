@@ -8,6 +8,7 @@ export default function Home() {
   return (
     <main>
       <Container>
+      <NavBar />
         <H2>Student Sign-up form</H2>
         <StudentSignInForm />
       </Container>

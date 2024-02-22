@@ -8,9 +8,12 @@ import Link from "next/link";
 import { getCurrentTime } from "@/utils/functions";
 import { getEndTime } from "@/utils/functions";
 import { startClass } from "@/utils/api";
+import { get_user_data, get_user_location } from "@/utils/functions";
 
 const ClassTemplates = () => {
   const [templates, setTemplates] = useState([]);
+  const user = get_user_data();
+  console.log(user);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,16 +32,29 @@ const ClassTemplates = () => {
   const handleButtonClick = (post_data) => {
     const data = {
       ...post_data,
-      lecturer_id: 1,
+      lecturer_id: user.id,
       start_time: getCurrentTime(),
       end_time: getEndTime(getCurrentTime(), 2),
-      location: { long: 500, lat: 600 },
+      location: "",
       course: post_data.course,
-      attendance_list: [{ student_id: 1, mins_late: 20 }],
+      attendance_list: [],
       status: "ongoing",
     };
 
-    startClass(data);
+    console.log(data);
+
+    get_user_location().then((location) =>
+      startClass({
+        ...post_data,
+        lecturer_id: user.id,
+        start_time: getCurrentTime(),
+        end_time: getEndTime(getCurrentTime(), 2),
+        location: location,
+        course: post_data.course,
+        attendance_list: [],
+        status: "ongoing",
+      })
+    );
   };
 
   return (
@@ -46,16 +62,20 @@ const ClassTemplates = () => {
       {templates.length > 0
         ? templates.map(
             ({ course_code, course_name, course, group, level, id }, index) => (
-              <Card key={index}>
-                <div>
-                  <H2>{course_name}</H2>
-                  <span>{course_code}</span>
+              <div
+                key={index}
+                className="flex gap-2 flex-col hover:bg-secondary  p-2 rounded"
+              >
+                <div className="flex justify-between items-center flex-wrap">
+                  <H2>{course_code}</H2>
+
+                  <span>{level}</span>
+                  <span className="text-xl">Group {group}</span>
                 </div>
-                <span>{level || 100}</span>
-                <span>{group}</span>
 
                 <Link href={`/class/${id}`}>
                   <Button
+                    variant="outline"
                     onClick={() =>
                       handleButtonClick({
                         course_code,
@@ -69,7 +89,7 @@ const ClassTemplates = () => {
                     Start class
                   </Button>
                 </Link>
-              </Card>
+              </div>
             )
           )
         : ""}

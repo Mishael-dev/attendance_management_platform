@@ -28,39 +28,40 @@ const StudentSignInForm = () => {
       });
   };
 
-
   return (
     <div>
       <Container sm>
         <form onSubmit={handleSubmit(onSubmit)} className="mt-20">
           {/* Matric Number */}
-          <div className="flex flex-col items-start w-[60%] mt-4">
-            <Label htmlFor="matric_number" className="text-right">
-              Matric Number
-            </Label>
-            <Input
-              id="matric_number"
-              type="text"
-              {...register("matric_number", { required: true })}
-            />
-          </div>
+          <div className="md:w-[60%] ">
+            <div className="flex flex-col items-start  mt-4">
+              <Label htmlFor="matric_number" className="text-right">
+                Matric Number
+              </Label>
+              <Input
+                id="matric_number"
+                type="text"
+                {...register("matric_number", { required: true })}
+              />
+            </div>
 
-          {/* Password */}
-          <div className="flex flex-col items-start w-[60%] mt-4">
-            <Label htmlFor="password" className="text-right">
-              Password
-            </Label>
-            <Input
-              id="password"
-              type="password"
-              {...register("password", { required: true })}
-            />
-          </div>
+            {/* Password */}
+            <div className="flex flex-col items-start  mt-4">
+              <Label htmlFor="password" className="text-right">
+                Password
+              </Label>
+              <Input
+                id="password"
+                type="password"
+                {...register("password", { required: true })}
+              />
+            </div>
 
-          {/* Submit Button */}
-          <Button type="submit">
-            Sign Up
-          </Button>
+            {/* Submit Button */}
+            <Button className="mt-4" type="submit">
+              Sign Up
+            </Button>
+          </div>
         </form>
       </Container>
     </div>

@@ -46,6 +46,7 @@ def get_class_templates():
         result = conn.execute(query)
 
         rows = result.fetchall()
+        print(rows)
 
         class_templates = [
             dict(zip(result.keys(), row))
@@ -96,7 +97,6 @@ def add_student(data):
             "message": "done",
             "user": dict(result._asdict())
         }
-
 
 def add_lecturer(data):
     with connect.engine.connect() as conn:
@@ -220,6 +220,7 @@ def add_student_attendance(student_id, arrival_time, class_id):
         student_query = select(tables.student).where(tables.student.c.id == student_id)
         student_result = conn.execute(student_query)
         student_data = student_result.fetchone()
+        print(student_data)
 
         if not student_data:
             return {
@@ -239,11 +240,14 @@ def add_student_attendance(student_id, arrival_time, class_id):
                 "status": "failed"
             }
 
-        # Update attendance list in class instance
+        # (5, 'Godwin', 'Godwin Obieze', 'Computer Science', 155694, 'C', 'godwin@gmail.com', 'helloworld', 100)
         attendance_list = class_instance_data.attendance_list or []
         student_attendance = {
-            "student_id": student_id,
-            "arrival_time": arrival_time  # Assuming arrival_time is already in the correct format
+            "id": student_id,
+            "arrival_time": arrival_time,
+            "full_name":student_data[2],
+            "group": student_data[5],
+            "matric_number" : student_data[4]
         }
         attendance_list.append(student_attendance)
 
@@ -259,4 +263,48 @@ def add_student_attendance(student_id, arrival_time, class_id):
         return {
             "message": "Attendance added successfully",
             "status": "successful"
+        }
+
+def get_class_location(class_id):
+    with connect.engine.connect() as conn:
+        # Retrieve class instance information
+        query = select(tables.class_instance).where(tables.class_instance.c.id == class_id)
+        result = conn.execute(query)
+        class_instance_data = result.fetchone()
+
+        if not class_instance_data:
+            return {
+                "message": "Class not found",
+                "status": "failed"
+            }
+
+        location = class_instance_data.location
+        return {
+            "message": "done",
+            "status": "successful",
+            "data": {"class_id": class_id, "location": location}
+        }
+    
+def get_attendance(class_id):
+    with connect.engine.connect() as conn:
+        query = select(tables.class_instance).where(tables.class_instance.c.id == class_id)
+        result = conn.execute(query)
+        class_instance_data = result.fetchone()
+
+        if not class_instance_data:
+            return {
+                "message": "Class not found",
+                "status": "failed"
+            }
+
+        attendance = class_instance_data.attendance_list
+        course = class_instance_data.course_name
+        time = class_instance_data.end_time
+        group = class_instance_data.group
+
+        return {
+            "attendance": attendance,
+            "course": course,
+            "time": time,
+            "group": group
         }
